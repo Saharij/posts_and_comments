@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Routes, Route, Link } from "react-router-dom";
+import { Button, Container } from "@mui/material";
+
 import './App.css';
+import { PostsInfo } from './pages/PostsInfo';
+import { CreatePost } from './pages/CreatePost';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "space-between", paddingTop: 2 }}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Button variant="outlined">
+            Post info
+          </Button>
+        </Link>
+        <Link to="/createPost" style={{ textDecoration: 'none' }}>
+          <Button variant="outlined">
+            Create Post
+          </Button>
+        </Link>
+      </Container>
+      <Routes>
+        <Route path="/" element={<PostsInfo />} />
+        <Route path="/createPost" element={<CreatePost />} />
+      </Routes>
+
     </div>
   );
 }
