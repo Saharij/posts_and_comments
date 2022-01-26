@@ -4,18 +4,19 @@ import { Card, CardContent, Typography, List, ListItem } from "@mui/material";
 
 import { Comment } from "../../dataTypes";
 import { createPostComment } from "../../api/api";
-import { onCreatedComment, fetchPost, postSelector } from "../../redux/store";
+import { onCreatedComment, fetchPost, activePostSelector } from "../../redux/store";
 import { CreateNewComment } from "../Forms/CreateNewComment";
 
 
-type PostDetails = {
+type PostDetailsProps = {
   postId: number;
 }
 
-export const PostDetails: React.FC<PostDetails> = ({ postId }) => {
+export const PostDetails: React.FC<PostDetailsProps> = ({ postId }) => {
   const dispatch = useDispatch();
-  const activePost = useSelector(postSelector);
+  const activePost = useSelector(activePostSelector);
   const [commentBody, setCommentBody] = useState<string>('');
+
   const isSubmitDisabled = !commentBody;
 
   useEffect(() => {

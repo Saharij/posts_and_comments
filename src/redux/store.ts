@@ -12,8 +12,8 @@ const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
 const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
 const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 
-export const postsFromStore = (state: InitialState) => state.posts;
-export const postSelector = (state: InitialState) => state.post;
+export const postsSelector = (state: InitialState) => state.posts;
+export const activePostSelector = (state: InitialState) => state.acitvePost;
 
 export const fetchPosts = () => {
   return (dispatch: any) => {
@@ -55,12 +55,12 @@ export const onRemovePost = (id: number) => ({
 
 type InitialState = {
   posts: Post[] | [];
-  post: ActivePost | null;
+  acitvePost: ActivePost | null;
 };
 
 const initialState: InitialState = {
   posts: [],
-  post: null,
+  acitvePost: null,
 };
 
 const rootReducer = (state = initialState, action: AnyAction) => {
@@ -74,15 +74,15 @@ const rootReducer = (state = initialState, action: AnyAction) => {
     case FETCH_POST_SUCCESS:
       return {
         ...state,
-        post: action.data,
+        acitvePost: action.data,
       };
 
     case ADD_NEW_COMMENT:
       return {
         ...state,
-        post: {
-          ...state.post,
-          comments: state?.post?.comments ? [...state.post.comments, action.data] : [action.data],
+        acitvePost: {
+          ...state.acitvePost,
+          comments: state?.acitvePost?.comments ? [...state.acitvePost.comments, action.data] : [action.data],
         },
       };
 

@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { FormGroup, CardActions, Button, TextField } from "@mui/material";
 
-type EditPost = {
+type EditPostProps = {
   title: string;
   body: string;
   isDisabled: boolean;
@@ -10,7 +10,7 @@ type EditPost = {
   inputChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const EditPost: React.FC<EditPost> = ({
+export const EditPost: React.FC<EditPostProps> = ({
   title,
   body,
   isDisabled,

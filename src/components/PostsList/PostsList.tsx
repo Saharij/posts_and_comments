@@ -5,15 +5,15 @@ import { Post } from "../../dataTypes";
 import { List, ListItem } from "@mui/material";
 import { PostItem } from "../PostItem/index";
 import { deletePost } from "../../api/api";
-import { postsFromStore, fetchPosts, onRemovePost } from "../../redux/store";
+import { postsSelector, fetchPosts, onRemovePost } from "../../redux/store";
 
-type PostsList = {
+type PostsListProps = {
   onPostSelect: Dispatch<SetStateAction<number | null>>;
 }
 
-export const PostsList: React.FC<PostsList> = ({ onPostSelect }) => {
+export const PostsList: React.FC<PostsListProps> = ({ onPostSelect }) => {
   const dispatch = useDispatch();
-  const posts = useSelector(postsFromStore);
+  const posts = useSelector(postsSelector);
 
   useEffect(() => {
     dispatch(fetchPosts());

@@ -1,12 +1,12 @@
 import { Typography, CardContent  } from "@mui/material";
 
-type Props = {
+type PostContentProps = {
   id: number,
   body: string,
   title: string,
 }
 
-export const PostContent: React.FC<Props> = ({ id, body, title }) => {
+export const PostContent: React.FC<PostContentProps> = ({ id, body, title }) => {
   return (
     <CardContent>
       <Typography>

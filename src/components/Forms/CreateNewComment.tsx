@@ -1,14 +1,14 @@
 import React, { ChangeEvent } from "react";
 import { FormGroup, Button, TextField } from "@mui/material";
 
-type CreateNewComment = {
+type CreateNewCommentProps = {
   inputValue: string;
   isDisabled: boolean;
   inputChange: (e: string) => void;
   submitForm: (e: React.FormEvent) => void;
-}
+};
 
-export const CreateNewComment: React.FC<CreateNewComment> = ({
+export const CreateNewComment: React.FC<CreateNewCommentProps> = ({
   inputValue,
   isDisabled,
   inputChange,

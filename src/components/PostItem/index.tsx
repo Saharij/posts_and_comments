@@ -8,15 +8,14 @@ import { onEditPost } from "../../redux/store";
 import { EditPost } from "./components/EditPost";
 import { PostContent } from "./components/PostContent";
 
-type PostItem = {
+type PostItemProps = {
   selectPost: Dispatch<SetStateAction<number | null>>;
   removePost: (id: number) => void;
   postItem: Post;
 }
 
-export const PostItem: React.FC<PostItem> = ({ selectPost, removePost, postItem }) => {
+export const PostItem: React.FC<PostItemProps> = ({ selectPost, removePost, postItem }) => {
   const dispatch = useDispatch();
-
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [post, setPostItem] = useState(postItem);
 

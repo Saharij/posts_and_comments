@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { Typography, FormGroup, Button, TextField, Container, Card } from "@mui/material";
 
-type CreateNewPost = {
+type CreateNewPostProps = {
   title: string;
   body: string;
   isDisabled: boolean;
@@ -9,7 +9,7 @@ type CreateNewPost = {
   inputChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const CreateNewPost: React.FC<CreateNewPost> = ({
+export const CreateNewPost: React.FC<CreateNewPostProps> = ({
   title,
   body,
   isDisabled,
