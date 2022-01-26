@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Card, CardContent, Typography, List, ListItem } from "@mui/material";
 
 import { Comment } from "../../dataTypes";
-import { createPostComment } from "../../api/api";
+import { createPostComment } from "../../api";
 import { onCreatedComment, fetchPost, activePostSelector } from "../../redux/store";
 import { CreateNewComment } from "../Forms/CreateNewComment";
 

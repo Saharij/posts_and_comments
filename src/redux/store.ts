@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, AnyAction, applyMiddleware } from 'redux';
 
 import { ActivePost, Post } from '../dataTypes';
-import { getPosts, getPost } from '../api/api';
+import { getPosts, getPost } from '../api';
 
 const EDIT_POST = 'EDIT_POST';
 const REMOVE_POST = 'REMOVE_POST';

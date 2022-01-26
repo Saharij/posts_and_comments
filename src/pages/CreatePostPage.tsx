@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 
-import { createPost } from "../api/api";
+import { createPost } from "../api";
 import { CreateNewPost } from "../components/Forms/CreateNewPost";
 import { onCreatedPost } from "../redux/store";
 

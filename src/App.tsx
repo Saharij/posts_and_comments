@@ -1,10 +1,20 @@
 import { Box, Tabs, Tab } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 
 import './App.css';
 import { PostsInfoPage } from './pages/PostsInfoPage';
 import { CreatePostPage } from './pages/CreatePostPage';
+
+type TabItem = {
+  path: string;
+  name: string;
+}
+
+const tabs: TabItem[] = [
+  { path: '/', name: 'Post Info' },
+  { path: '/create-post', name: 'Create post' },
+];
 
 function App() {
   const navigate = useNavigate();
@@ -12,7 +22,9 @@ function App() {
   const [tabValue, setTabValue] = useState('/');
 
   useEffect(() => {
-    setTabValue(pathname);
+    if (tabs.some(({ path }) => path === pathname)) {
+      setTabValue(pathname);
+    }
   }, [pathname]);
 
   const changeTabValue = (event: React.SyntheticEvent, newValue: string) => {
@@ -27,19 +39,19 @@ function App() {
           value={tabValue}
           onChange={changeTabValue}
         >
-          <Tab
-            value="/"
-            label="Post Info"
-          />
-          <Tab
-            value="/create-post"
-            label="Create post"
-          />
+          {tabs.map(({ path, name }) => (
+            <Tab
+              key={path}
+              value={path}
+              label={name}
+            />
+          ))}
         </Tabs>
       </Box>
       <Routes>
         <Route path="/" element={<PostsInfoPage />} />
         <Route path="/create-post" element={<CreatePostPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>
   );

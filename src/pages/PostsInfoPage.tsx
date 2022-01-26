@@ -5,19 +5,17 @@ import { PostsList } from "../components/PostsList/PostsList";
 import { PostDetails } from "../components/PostDetails/PostDetails";
 
 export const PostsInfoPage: React.FC = () => {
-  const [currentPostId, setCurrentPostId] = useState<number | null>(null);
+  const [activePostId, setActivePostId] = useState<number | null>(null);
 
   return (
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={7}>
-          <PostsList
-            onPostSelect={setCurrentPostId}
-          />
+          <PostsList onPostSelect={setActivePostId} />
         </Grid>
-        {currentPostId && (
+        {activePostId && (
           <Grid item xs={5}>
-            <PostDetails postId={currentPostId} />
+            <PostDetails postId={activePostId} />
           </Grid>
         )}
       </Grid>

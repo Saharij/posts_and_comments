@@ -17,10 +17,10 @@ export const CreateNewPost: React.FC<CreateNewPostProps> = ({
   inputChange,
 }) => (
   <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-    <Typography variant="h2">
+    <Typography variant="h2" sx={{ marginBottom: 3 }}>
       Create new post
     </Typography>
-    <Card sx={{ minWidth: 600, padding: 1 }}>
+    <Card sx={{ minWidth: 600, padding: 2 }}>
       <form onSubmit={submitForm}>
         <FormGroup>
           <TextField

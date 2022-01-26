@@ -1,15 +1,15 @@
-import { useEffect, useCallback, Dispatch, SetStateAction } from "react";
+import { List, ListItem } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useCallback, Dispatch, SetStateAction } from "react";
 
 import { Post } from "../../dataTypes";
-import { List, ListItem } from "@mui/material";
+import { deletePost } from "../../api";
 import { PostItem } from "../PostItem/index";
-import { deletePost } from "../../api/api";
 import { postsSelector, fetchPosts, onRemovePost } from "../../redux/store";
 
 type PostsListProps = {
   onPostSelect: Dispatch<SetStateAction<number | null>>;
-}
+};
 
 export const PostsList: React.FC<PostsListProps> = ({ onPostSelect }) => {
   const dispatch = useDispatch();
@@ -23,8 +23,9 @@ export const PostsList: React.FC<PostsListProps> = ({ onPostSelect }) => {
     deletePost(id)
       .then(() => {
         dispatch(onRemovePost(id));
+        onPostSelect(null);
       });
-  }, [dispatch]);
+  }, [dispatch, onPostSelect]);
 
   return (
     <List>
