@@ -14,3 +14,8 @@ The complete application should include pages/features to:
 ## Stack
 
 In this project i used this stack of technologies: `TypeScript`, `React`, `React-router`, `React hooks`, `Redux`, `Redux-thunk`, `Web API`, `Fetch`, `Material Ui`, `HTML`, `CSS`.
+
+## To run this project on local
+* Clone project
+* Install - `npm install`
+* To start run - `npm start`
