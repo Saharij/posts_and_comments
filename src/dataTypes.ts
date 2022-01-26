@@ -1,7 +1,10 @@
-export interface Post {
+export interface BasePost {
   body: string;
-  id: number;
   title: string;
+}
+
+export interface Post extends BasePost {
+  id: number;
 }
 
 export interface BaseComment {
@@ -11,4 +14,8 @@ export interface BaseComment {
 
 export interface Comment extends BaseComment {
   id: number;
+}
+
+export interface ActivePost extends Post {
+  comments: Comment[];
 }

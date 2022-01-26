@@ -1,30 +1,46 @@
-import { Routes, Route, Link } from "react-router-dom";
-import { Button, Container } from "@mui/material";
+import { Box, Tabs, Tab } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import './App.css';
-import { PostsInfo } from './pages/PostsInfo';
-import { CreatePost } from './pages/CreatePost';
+import { PostsInfoPage } from './pages/PostsInfoPage';
+import { CreatePostPage } from './pages/CreatePostPage';
 
 function App() {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const [tabValue, setTabValue] = useState('/');
+
+  useEffect(() => {
+    setTabValue(pathname);
+  }, [pathname]);
+
+  const changeTabValue = (event: React.SyntheticEvent, newValue: string) => {
+    setTabValue(newValue);
+    navigate(newValue);
+  };
+
   return (
     <div className="app">
-      <Container maxWidth="sm" sx={{ display: "flex", justifyContent: "space-between", paddingTop: 2 }}>
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <Button variant="outlined">
-            Post info
-          </Button>
-        </Link>
-        <Link to="/createPost" style={{ textDecoration: 'none' }}>
-          <Button variant="outlined">
-            Create Post
-          </Button>
-        </Link>
-      </Container>
+      <Box>
+        <Tabs
+          value={tabValue}
+          onChange={changeTabValue}
+        >
+          <Tab
+            value="/"
+            label="Post Info"
+          />
+          <Tab
+            value="/create-post"
+            label="Create post"
+          />
+        </Tabs>
+      </Box>
       <Routes>
-        <Route path="/" element={<PostsInfo />} />
-        <Route path="/createPost" element={<CreatePost />} />
+        <Route path="/" element={<PostsInfoPage />} />
+        <Route path="/create-post" element={<CreatePostPage />} />
       </Routes>
-
     </div>
   );
 }

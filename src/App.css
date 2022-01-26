@@ -13,4 +13,5 @@ body {
 .app {
   height: 100%;
   background: radial-gradient(circle, rgba(249,243,243,1) 15%, rgba(224,223,222,0.8953956582633054) 43%, rgba(231,233,244,0.9542191876750701) 69%, rgba(237,245,254,1) 100%);
+  overflow-y: auto;
 }

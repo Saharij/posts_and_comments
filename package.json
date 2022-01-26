@@ -21,6 +21,7 @@
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
+    "typescript": "^4.5.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -33,7 +34,52 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "array-bracket-spacing": [
+        1,
+        "never"
+      ],
+      "block-spacing": [
+        1,
+        "always"
+      ],
+      "comma-dangle": [
+        1,
+        {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "always-multiline"
+        }
+      ],
+      "comma-spacing": [
+        1,
+        {
+          "before": false,
+          "after": true
+        }
+      ],
+      "eol-last": [
+        1,
+        "always"
+      ],
+      "no-unneeded-ternary": [
+        1,
+        {
+          "defaultAssignment": false
+        }
+      ],
+      "object-curly-spacing": [
+        1,
+        "always"
+      ],
+      "semi": [
+        1,
+        "always"
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -46,11 +92,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/parser": "^5.10.0",
-    "eslint": "^8.7.0",
-    "typescript": "^4.5.5"
   }
 }

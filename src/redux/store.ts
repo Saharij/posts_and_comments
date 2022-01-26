@@ -2,44 +2,65 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, AnyAction, applyMiddleware } from 'redux';
 
-import { Post } from '../dataTypes';
-import { getPosts } from '../api/api';
-import { getComments } from '../api/api';
+import { ActivePost, Post } from '../dataTypes';
+import { getPosts, getPost } from '../api/api';
 
+const EDIT_POST = 'EDIT_POST';
+const REMOVE_POST = 'REMOVE_POST';
+const ADD_NEW_POST = 'ADD_NEW_POST';
 const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT';
+const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
 const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
-const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
 
 export const postsFromStore = (state: InitialState) => state.posts;
-export const commentsFromStore = (state: InitialState) => state.comments;
+export const postSelector = (state: InitialState) => state.post;
 
 export const fetchPosts = () => {
   return (dispatch: any) => {
     getPosts()
-      .then(response => dispatch({ type: FETCH_POSTS_SUCCESS, data: response }))
-  }
-}
+      .then(response => (
+        dispatch({ type: FETCH_POSTS_SUCCESS, data: response })
+      ));
+  };
+};
 
-export const fetchComments = () => {
+export const fetchPost = (id: number) => {
   return (dispatch: any) => {
-    getComments()
-      .then((response: Comment) => dispatch({ type: FETCH_COMMENTS_SUCCESS, data: response }))
-  }
-}
+    getPost(id)
+      .then((response: Comment) => (
+        dispatch({ type: FETCH_POST_SUCCESS, data: response })
+      ));
+  };
+};
+
+export const onEditPost = (post: Post) => ({
+  type: EDIT_POST,
+  data: post,
+});
 
 export const onCreatedComment = (comment: Comment) => ({
   type: ADD_NEW_COMMENT,
   data: comment,
-})
+});
+
+export const onCreatedPost = (post: Post) => ({
+  type: ADD_NEW_POST,
+  data: post,
+});
+
+export const onRemovePost = (id: number) => ({
+  type: REMOVE_POST,
+  data: id,
+});
 
 type InitialState = {
   posts: Post[] | [];
-  comments: Comment[] | [];
+  post: ActivePost | null;
 };
 
 const initialState: InitialState = {
   posts: [],
-  comments: [],
+  post: null,
 };
 
 const rootReducer = (state = initialState, action: AnyAction) => {
@@ -47,31 +68,54 @@ const rootReducer = (state = initialState, action: AnyAction) => {
     case FETCH_POSTS_SUCCESS:
       return {
         ...state,
-        posts: [...action.data]
-      }
+        posts: [...action.data],
+      };
 
-    case FETCH_COMMENTS_SUCCESS:
+    case FETCH_POST_SUCCESS:
       return {
         ...state,
-        comments: [...action.data],
-      }
+        post: action.data,
+      };
 
     case ADD_NEW_COMMENT:
       return {
         ...state,
-        comments: [...state.comments, action.data]
-      }
+        post: {
+          ...state.post,
+          comments: state?.post?.comments ? [...state.post.comments, action.data] : [action.data],
+        },
+      };
+
+    case ADD_NEW_POST:
+      return {
+        ...state,
+        posts: [...state.posts, action.data],
+      };
+
+    case REMOVE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter(item => item.id !== action.data),
+      };
+
+    case EDIT_POST:
+      return {
+        ...state,
+        posts: state.posts.map(item => (
+          item.id === action.data.id ? action.data : item
+        )),
+      };
 
     default:
       return state;
   }
-}
+};
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk),
   ),
-)
+);
 
 export default store;
