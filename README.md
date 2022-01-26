@@ -1,6 +1,6 @@
 # List of Posts
 
-Click [DEMO]() to see a demonstration of the page.
+Click [DEMO](https://saharij.github.io/posts_and_comments/) to see a demonstration of the page.
 
 ## Main task
 The complete application should include pages/features to:
